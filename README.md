@@ -15,7 +15,7 @@
 # 从源码安装
 git clone https://github.com/Ciciy-l/dfpipe.git
 cd dfpipe
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ## 快速开始
