@@ -1,0 +1,38 @@
+{
+    "name": "简单数据处理管道",
+    "loader": {
+        "name": "CSVLoader",
+        "params": {
+            "input_dir": "data",
+            "file_pattern": "*.csv",
+            "encoding": "utf-8"
+        }
+    },
+    "processors": [
+        {
+            "name": "ColumnProcessor",
+            "params": {
+                "operation": "rename",
+                "mapping": {
+                    "old_name": "new_name",
+                    "old_age": "new_age"
+                }
+            }
+        },
+        {
+            "name": "FilterProcessor",
+            "params": {
+                "column": "age",
+                "condition": 18
+            }
+        }
+    ],
+    "writer": {
+        "name": "CSVWriter",
+        "params": {
+            "output_dir": "output",
+            "filename": "processed_data.csv",
+            "encoding": "utf-8"
+        }
+    }
+} 
