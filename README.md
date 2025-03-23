@@ -12,6 +12,9 @@
 ## 安装
 
 ```bash
+# 从 PyPI 安装
+pip install dfpipe
+
 # 从源码安装
 git clone https://github.com/Ciciy-l/dfpipe.git
 cd dfpipe
@@ -25,7 +28,7 @@ pip install -e .
 最简单的使用方式是通过命令行直接运行：
 
 ```bash
-python -m dfpipe.cli --input-dir data --output-dir output
+python -m dfpipe --input-dir data --output-dir output
 ```
 
 这将使用默认的CSV加载器和输出器处理数据。
@@ -35,7 +38,7 @@ python -m dfpipe.cli --input-dir data --output-dir output
 创建配置文件来定义完整的数据处理流程：
 
 ```bash
-python -m dfpipe.cli --config dfpipe/examples/simple.json
+python -m dfpipe --config dfpipe/examples/simple.json
 ```
 
 ### 配置文件示例
