@@ -1,13 +1,22 @@
 # DFPipe
 
+[![English](https://img.shields.io/badge/English-007ACC?style=flat-square&logo=python&logoColor=white)](README_EN.md) [![中文](https://img.shields.io/badge/中文-4A4A4A?style=flat-square&logo=python&logoColor=white)](README.md)
+
 A flexible and extensible DataFrame processing pipeline tool that supports multiple data sources, processing algorithms, and output formats.
 
 ## Features
 
-- **Modular Design**: Provides three basic components: data loaders, processors, and writers
-- **Flexible Configuration**: Supports building processing pipelines through JSON configuration files or code API
+- **Modular Design**: Provides three basic components: data loader, processor, and writer
+- **Flexible Configuration**: Supports building processing workflows through JSON configuration files or code API
 - **Easy to Extend**: Simple component registration mechanism for adding custom components
 - **Rich Logging**: Detailed processing logs for debugging and monitoring
+- **Wide Compatibility**: Supports all Python versions from 3.6 to 3.12
+
+## System Requirements
+
+- Python >= 3.6
+- pandas >= 1.3.0
+- numpy >= 1.20.0
 
 ## Installation
 
@@ -19,6 +28,9 @@ pip install dfpipe
 git clone https://github.com/Ciciy-l/dfpipe.git
 cd dfpipe
 pip install -e .
+
+# Install development version (includes testing tools)
+pip install -e ".[dev]"
 ```
 
 ## Quick Start
@@ -104,30 +116,30 @@ pipeline.set_writer(writer)
 pipeline.run()
 ```
 
-## Component Overview
+## Component Introduction
 
-### Data Loaders
+### Data Loader
 
-Data loaders are responsible for loading data from various sources. The default loader is `CSVLoader`.
+Data loaders are responsible for loading data from various data sources. The default loader is `CSVLoader`.
 
 #### Built-in Loaders
 
-- **CSVLoader**: Loads data from CSV files
+- **CSVLoader**: Load data from CSV files
   - `input_dir`: Input directory
   - `file_pattern`: File matching pattern
   - `encoding`: File encoding
 
-### Data Processors
+### Data Processor
 
 Data processors are responsible for processing and transforming data.
 
 #### Built-in Processors
 
-- **FilterProcessor**: Filters data based on conditions
+- **FilterProcessor**: Filter data based on conditions
   - `column`: Column name
   - `condition`: Filter condition
 
-- **TransformProcessor**: Applies transformation functions to columns
+- **TransformProcessor**: Apply transformation function to columns
   - `column`: Column to transform
   - `transform_func`: Transformation function
   - `target_column`: Result storage column
@@ -136,15 +148,15 @@ Data processors are responsible for processing and transforming data.
   - `operation`: Operation type ('add', 'drop', 'rename')
   - Operation-specific parameters
 
-### Data Writers
+### Data Writer
 
 Data writers are responsible for saving processed data to various destinations.
 
 #### Built-in Writers
 
-- **CSVWriter**: Saves data as CSV files
+- **CSVWriter**: Save data as CSV files
   - `output_dir`: Output directory
-  - `filename`: Filename
+  - `filename`: File name
   - `encoding`: File encoding
 
 ## Custom Components

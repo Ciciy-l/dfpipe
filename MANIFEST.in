@@ -1,9 +1,25 @@
 include LICENSE
 include README.md
 include requirements.txt
+include requirements-test.txt
 include pyproject.toml
 recursive-include examples *.json *.py
 global-exclude __pycache__
 global-exclude *.py[cod]
 global-exclude *.so
 global-exclude PUBLISHING.md
+
+recursive-exclude tests *
+recursive-exclude docs *
+recursive-exclude .git *
+recursive-exclude .github *
+recursive-exclude .vscode *
+recursive-exclude .idea *
+recursive-exclude __pycache__ *
+recursive-exclude *.pyc
+recursive-exclude *.pyo
+recursive-exclude *.pyd
+recursive-exclude .Python
+recursive-exclude build *
+recursive-exclude dist *
+recursive-exclude *.egg-info *

@@ -1,5 +1,7 @@
 # DFPipe
 
+[![English](https://img.shields.io/badge/English-007ACC?style=flat-square&logo=python&logoColor=white)](README_EN.md) [![中文](https://img.shields.io/badge/中文-4A4A4A?style=flat-square&logo=python&logoColor=white)](README.md)
+
 一个灵活、可扩展的DataFrame处理管道工具，支持多种数据源、处理算法和输出格式。
 
 ## 特点
@@ -8,6 +10,13 @@
 - **灵活配置**: 支持通过JSON配置文件或代码API构建处理流程
 - **易于扩展**: 简单的组件注册机制，方便添加自定义组件
 - **丰富日志**: 详细的处理日志，便于调试和监控
+- **广泛兼容**: 支持 Python 3.6 到 3.12 的所有版本
+
+## 系统要求
+
+- Python >= 3.6
+- pandas >= 1.3.0
+- numpy >= 1.20.0
 
 ## 安装
 
@@ -19,6 +28,9 @@ pip install dfpipe
 git clone https://github.com/Ciciy-l/dfpipe.git
 cd dfpipe
 pip install -e .
+
+# 安装开发版本（包含测试工具）
+pip install -e ".[dev]"
 ```
 
 ## 快速开始
