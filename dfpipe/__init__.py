@@ -14,17 +14,17 @@ __author__ = "Leyia"
 from dfpipe.core.base import DataLoader, DataProcessor, DataWriter
 from dfpipe.core.pipeline import Pipeline
 from dfpipe.core.registry import ComponentRegistry
-from dfpipe.utils.logging import setup_logging
 
 # 导入内置组件，确保它们被注册
 from dfpipe.loaders.csv_loader import CSVLoader
-from dfpipe.writers.csv_writer import CSVWriter
 from dfpipe.processors.base_processor import (
-    FilterProcessor, 
-    TransformProcessor, 
     ColumnProcessor,
     FieldsOrganizer,
+    FilterProcessor,
+    TransformProcessor,
 )
+from dfpipe.utils.logging import setup_logging
+from dfpipe.writers.csv_writer import CSVWriter
 
 # 为常用类提供简短别名
 Loader = DataLoader
@@ -33,4 +33,4 @@ Writer = DataWriter
 Registry = ComponentRegistry
 
 # 自动执行组件发现
-ComponentRegistry.auto_discover() 
+ComponentRegistry.auto_discover()

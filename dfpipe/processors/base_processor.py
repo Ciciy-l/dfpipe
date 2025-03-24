@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from typing import Any, Callable, Dict, List, Literal, Union
+
 import pandas as pd
-from typing import List, Dict, Any, Literal, Callable, Union
 
 from dfpipe.core.base import DataProcessor
 from dfpipe.core.registry import ComponentRegistry
@@ -25,9 +26,7 @@ class FilterProcessor(DataProcessor):
             condition: 过滤条件，可以是一个函数或表达式
             **kwargs: 其他参数
         """
-        super().__init__(
-            name="FilterProcessor", description=f"根据列'{column}'过滤数据"
-        )
+        super().__init__(name="FilterProcessor", description=f"根据列'{column}'过滤数据")
         self.column = column
         self.condition = condition
 
@@ -126,11 +125,7 @@ class TransformProcessor(DataProcessor):
 class ColumnProcessor(DataProcessor):
     """列操作处理器（添加、删除、重命名列）"""
 
-    def __init__(
-        self, 
-        operation: Literal["add", "drop", "rename"], 
-        **kwargs
-    ):
+    def __init__(self, operation: Literal["add", "drop", "rename"], **kwargs):
         """
         初始化列操作处理器
 
@@ -142,13 +137,13 @@ class ColumnProcessor(DataProcessor):
               - 当operation为'rename'时：需要提供mapping(字典，键为原列名，值为新列名)
         """
         super().__init__(name="ColumnProcessor", description=f"对列进行{operation}操作")
-        
+
         if operation not in ["add", "drop", "rename"]:
             raise ValueError(f"不支持的操作类型: {operation}, 仅支持: add, drop, rename")
-            
+
         self.operation = operation
         self.params = kwargs
-        
+
         # 检查必要参数
         if operation == "add" and "column" not in kwargs:
             raise ValueError("添加列操作必须提供column参数")
@@ -241,7 +236,6 @@ class FieldsOrganizer(DataProcessor):
         result = data.copy()
 
         try:
-
             # 确保所有目标字段存在
             for col in self.target_columns:
                 if col not in result.columns:
@@ -253,9 +247,7 @@ class FieldsOrganizer(DataProcessor):
             # 仅保留目标字段，并按照指定顺序排列
             result = result[self.target_columns]
 
-            self.logger.info(
-                f"字段组织完成，最终字段列表: {', '.join(self.target_columns)}"
-            )
+            self.logger.info(f"字段组织完成，最终字段列表: {', '.join(self.target_columns)}")
             return result
 
         except Exception as e:

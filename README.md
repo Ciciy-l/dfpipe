@@ -198,7 +198,7 @@ class MyCustomLoader(DataLoader):
         )
         self.param1 = param1
         self.param2 = param2
-    
+
     def load(self) -> pd.DataFrame:
         # 实现加载逻辑
         # ...
@@ -219,7 +219,7 @@ class MyCustomProcessor(DataProcessor):
         )
         self.param1 = param1
         self.param2 = param2
-    
+
     def process(self, data: pd.DataFrame) -> pd.DataFrame:
         # 实现处理逻辑
         # ...
@@ -240,7 +240,7 @@ class MyCustomWriter(DataWriter):
         )
         self.param1 = param1
         self.param2 = param2
-    
+
     def write(self, data: pd.DataFrame) -> None:
         # 实现输出逻辑
         # ...
@@ -248,4 +248,47 @@ class MyCustomWriter(DataWriter):
 
 ## 许可证
 
-MIT 
+MIT
+
+## 开发者指南
+
+### 代码风格规范
+
+本项目使用以下工具维护代码风格一致性：
+
+- **Black**: 自动代码格式化工具
+- **isort**: 导入语句排序工具
+
+#### 本地配置
+
+1. 安装开发依赖：
+
+```bash
+pip install black isort pre-commit
+```
+
+2. 设置pre-commit钩子：
+
+```bash
+pre-commit install
+```
+
+这将在每次提交前自动运行代码格式化检查。
+
+#### 手动格式化
+
+```bash
+# 格式化所有Python文件
+black .
+
+# 排序所有Python文件中的导入
+isort .
+```
+
+#### 配置文件
+
+代码风格配置在`pyproject.toml`文件中定义。
+
+### 持续集成
+
+我们使用GitHub Actions进行持续集成，确保所有提交都通过测试和代码风格检查。workflow配置见`.github/workflows/python-test.yml`。
