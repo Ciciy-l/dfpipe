@@ -192,6 +192,8 @@ class ColumnProcessor(DataProcessor):
 
             elif self.operation == "rename":
                 mapping = self.params.get("mapping", {})
+                if mapping is None:
+                    mapping = {}
                 valid_mapping = {
                     k: v for k, v in mapping.items() if k in result.columns
                 }

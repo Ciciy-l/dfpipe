@@ -28,3 +28,8 @@ env/
 .DS_Store
 Thumbs.db
 PUBLISHING.md
+
+# Coverage
+coverage_html_report/
+coverage.xml
+.coverage

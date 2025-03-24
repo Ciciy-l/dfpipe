@@ -191,6 +191,21 @@ class TestCSVWriter(BaseWriterTest):
             self.test_data,
             check_dtype=False
         )
+        
+    def test_write_error_handling(self):
+        """测试写入错误处理"""
+        # 创建CSV输出器
+        writer = CSVWriter(
+            output_dir=self.output_dir,
+            filename="test_error.csv",
+            use_timestamp=False
+        )
+        
+        # 模拟to_csv抛出异常
+        with patch('pandas.DataFrame.to_csv', side_effect=Exception("模拟写入错误")):
+            # 验证异常被抛出
+            with self.assertRaises(Exception):
+                writer.write(self.test_data)
 
 
 @pytest.mark.usefixtures("mock_csv_writer")

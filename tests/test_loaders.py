@@ -248,6 +248,87 @@ class TestCSVLoader(BaseLoaderTest):
         self.assertIn("category", result.columns)
         self.assertIn("source_file", result.columns)
 
+    def test_handle_read_error(self):
+        """测试处理读取CSV文件时的异常"""
+        # 创建测试目录
+        input_dir = os.path.join(self.temp_dir, "error_test")
+        os.makedirs(input_dir, exist_ok=True)
+        
+        # 创建正常CSV文件
+        normal_df = pd.DataFrame({
+            "id": [1, 2, 3],
+            "value": [10, 20, 30],
+            "category": ["A", "B", "C"]
+        })
+        normal_df.to_csv(os.path.join(input_dir, "normal.csv"), index=False)
+        
+        # 创建一个确保会失败的CSV文件（二进制内容）
+        with open(os.path.join(input_dir, "corrupted.csv"), "wb") as f:
+            f.write(b'\x80\x81\x82\xFF\xFE\xFD')  # 使用无效的二进制序列
+        
+        # 创建CSVLoader加载数据
+        loader = CSVLoader(input_dir=input_dir, file_pattern="*.csv")
+        
+        # 加载数据 - 应该只加载正常文件，忽略错误文件
+        result = loader.load()
+        
+        # 验证结果
+        self.assertFalse(result.empty)
+        self.assertEqual(len(result), 3)  # 只加载一个正常文件
+        self.assertEqual(result["source_file"].nunique(), 1)  # 只有一个源文件
+        self.assertEqual(result["source_file"].iloc[0], "normal.csv")
+    
+    def test_all_files_fail(self):
+        """测试所有CSV文件加载失败的情况"""
+        # 创建测试目录
+        input_dir = os.path.join(self.temp_dir, "all_fail_test")
+        os.makedirs(input_dir, exist_ok=True)
+        
+        # 创建两个格式错误的CSV文件
+        with open(os.path.join(input_dir, "corrupted1.csv"), "w") as f:
+            f.write("这不是有效的CSV格式")
+        
+        with open(os.path.join(input_dir, "corrupted2.csv"), "w") as f:
+            f.write("这也不是有效的CSV格式")
+        
+        # 创建CSVLoader加载数据
+        loader = CSVLoader(input_dir=input_dir, file_pattern="*.csv")
+        
+        # 通过patch模拟pd.read_csv总是抛出异常
+        with patch('pandas.read_csv', side_effect=Exception("模拟读取错误")):
+            # 加载数据 - 应该返回空DataFrame
+            result = loader.load()
+            
+            # 验证结果
+            self.assertTrue(result.empty)
+            self.assertIsInstance(result, pd.DataFrame)
+    
+    def test_create_nonexistent_directory(self):
+        """测试当输入目录不存在时创建目录的情况"""
+        # 创建指向尚不存在的目录的加载器
+        nonexistent_dir = os.path.join(self.temp_dir, "will_be_created")
+        
+        # 确保目录不存在
+        if os.path.exists(nonexistent_dir):
+            shutil.rmtree(nonexistent_dir)
+        
+        # 创建加载器
+        loader = CSVLoader(
+            input_dir=nonexistent_dir,
+            file_pattern="*.csv"
+        )
+        
+        # 加载数据 - 应该创建目录并返回空DataFrame
+        result = loader.load()
+        
+        # 验证结果
+        self.assertTrue(result.empty)
+        self.assertIsInstance(result, pd.DataFrame)
+        
+        # 验证目录已创建
+        self.assertTrue(os.path.exists(nonexistent_dir))
+        self.assertTrue(os.path.isdir(nonexistent_dir))
+
 
 class TestCSVLoaderWithMock(unittest.TestCase):
     """使用mock测试CSVLoader类"""

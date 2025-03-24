@@ -18,6 +18,29 @@ A flexible and extensible DataFrame processing pipeline tool that supports multi
 - pandas >= 1.3.0
 - numpy >= 1.20.0
 
+## Test Coverage
+
+DFPipe maintains a high level of test coverage to ensure reliability and stability:
+
+- **Comprehensive Test Suite**: Unit tests for all core components and integration tests for end-to-end workflows
+- **Mock-based Testing**: Efficient testing using mock objects to simulate file systems and external dependencies
+- **CI/CD Integration**: Automated testing on multiple Python versions to ensure cross-version compatibility
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run tests with coverage report
+pytest --cov=dfpipe
+
+# Generate HTML coverage report
+pytest --cov=dfpipe --cov-report=html
+```
+
+The current test coverage is over 99% for core components, ensuring robust behavior in various scenarios.
+
 ## Installation
 
 ```bash

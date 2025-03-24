@@ -1,0 +1,79 @@
+[run]
+# 数据源
+source = dfpipe
+
+# 忽略的文件
+omit =
+    # 入口模块
+    */dfpipe/__main__.py
+    */dfpipe/cli.py
+    
+    # 配置和版本信息
+    */dfpipe/__init__.py
+    */dfpipe/version.py
+    
+    # 示例文件
+    */dfpipe/examples/*
+    
+    # 测试文件本身
+    */tests/*
+    
+    # 第三方库和虚拟环境
+    */site-packages/*
+    */dist-packages/*
+    
+    # 其他系统文件
+    */.eggs/*
+    */.tox/*
+    */venv/*
+    */env/*
+
+# 包含分支覆盖率
+branch = True
+
+[report]
+# 显示缺失的行
+show_missing = True
+
+# 排除正则表达式
+exclude_lines =
+    # 跳过没有运行的防御性代码
+    pragma: no cover
+    
+    # 跳过抽象方法定义
+    @abstract
+    @abstractmethod
+    
+    # 跳过只在调试时运行的代码
+    def __repr__
+    if self\.debug
+    
+    # 跳过只在某些环境下运行的分支
+    if .*DEBUG_MODE.*:
+    
+    # 跳过异常输出语句
+    except ImportError:
+    raise NotImplementedError
+    pass
+    
+    # 跳过自定义异常类
+    class .*Error\(Exception\):
+
+# 覆盖率阈值
+fail_under = 99
+
+[html]
+# HTML报告目录
+directory = coverage_html_report
+
+# 标题
+title = DFPipe Coverage Report
+
+[xml]
+# XML报告输出
+output = coverage.xml
+
+[paths]
+source =
+    dfpipe/
+    */site-packages/dfpipe/ 

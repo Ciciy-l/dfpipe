@@ -32,6 +32,21 @@ class TestDataLoader(unittest.TestCase):
         data = self.loader.load()
         self.assertIsInstance(data, pd.DataFrame)
         self.assertFalse(data.empty)
+        
+    def test_loader_str(self):
+        """测试加载器字符串表示"""
+        expected_str = "test_loader: 测试加载器"
+        self.assertEqual(str(self.loader), expected_str)
+        
+    def test_abstract_methods(self):
+        """测试抽象方法是否必须实现"""
+        with self.assertRaises(TypeError):
+            # 创建一个不实现抽象方法的子类，应该会引发TypeError
+            class InvalidLoader(DataLoader):
+                pass
+            
+            # 尝试实例化应该会失败
+            invalid_loader = InvalidLoader(name="invalid", description="无效加载器")
 
 
 class TestDataProcessor(unittest.TestCase):
@@ -56,6 +71,21 @@ class TestDataProcessor(unittest.TestCase):
         self.assertIsInstance(result, pd.DataFrame)
         self.assertEqual(result.shape, self.test_data.shape)
         pd.testing.assert_frame_equal(result, self.test_data * 2)
+        
+    def test_processor_str(self):
+        """测试处理器字符串表示"""
+        expected_str = "test_processor: 测试处理器"
+        self.assertEqual(str(self.processor), expected_str)
+        
+    def test_abstract_methods(self):
+        """测试抽象方法是否必须实现"""
+        with self.assertRaises(TypeError):
+            # 创建一个不实现抽象方法的子类，应该会引发TypeError
+            class InvalidProcessor(DataProcessor):
+                pass
+            
+            # 尝试实例化应该会失败
+            invalid_processor = InvalidProcessor(name="invalid", description="无效处理器")
 
 
 class TestDataWriter(unittest.TestCase):
@@ -79,6 +109,21 @@ class TestDataWriter(unittest.TestCase):
         self.writer.write(self.test_data)
         self.assertIsInstance(self.writer.written_data, pd.DataFrame)
         pd.testing.assert_frame_equal(self.writer.written_data, self.test_data)
+        
+    def test_writer_str(self):
+        """测试输出器字符串表示"""
+        expected_str = "test_writer: 测试输出器"
+        self.assertEqual(str(self.writer), expected_str)
+        
+    def test_abstract_methods(self):
+        """测试抽象方法是否必须实现"""
+        with self.assertRaises(TypeError):
+            # 创建一个不实现抽象方法的子类，应该会引发TypeError
+            class InvalidWriter(DataWriter):
+                pass
+            
+            # 尝试实例化应该会失败
+            invalid_writer = InvalidWriter(name="invalid", description="无效输出器")
 
 
 if __name__ == "__main__":
