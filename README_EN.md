@@ -171,6 +171,10 @@ Data processors are responsible for processing and transforming data.
   - `operation`: Operation type ('add', 'drop', 'rename')
   - Operation-specific parameters
 
+- **FieldsOrganizer**: Organize and standardize fields
+  - `target_columns`: List of target fields, result will only contain these fields in the specified order
+  - `default_values`: Dictionary of field default values, key is field name, value is default value. If not provided, empty string is used by default
+
 ### Data Writer
 
 Data writers are responsible for saving processed data to various destinations.

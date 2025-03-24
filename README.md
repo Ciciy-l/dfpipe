@@ -171,6 +171,10 @@ pipeline.run()
   - `operation`: 操作类型（'add', 'drop', 'rename'）
   - 特定操作的参数
 
+- **FieldsOrganizer**: 组织和规范字段
+  - `target_columns`: 目标字段列表，结果将只包含这些字段并按此顺序排列
+  - `default_values`: 字段默认值字典，键为字段名，值为默认值。如果不提供，默认使用空字符串
+
 ### 数据输出器
 
 数据输出器负责将处理后的数据保存到各种目标位置。
