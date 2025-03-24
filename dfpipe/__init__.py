@@ -22,7 +22,8 @@ from dfpipe.writers.csv_writer import CSVWriter
 from dfpipe.processors.base_processor import (
     FilterProcessor, 
     TransformProcessor, 
-    ColumnProcessor
+    ColumnProcessor,
+    FieldsOrganizer,
 )
 
 # 为常用类提供简短别名
