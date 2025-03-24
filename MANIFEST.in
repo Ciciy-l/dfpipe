@@ -1,7 +1,9 @@
 include LICENSE
 include README.md
+include README_EN.md
 include requirements.txt
 include requirements-test.txt
+include requirements-dev.txt
 include pyproject.toml
 recursive-include examples *.json *.py
 global-exclude __pycache__
