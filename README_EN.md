@@ -198,7 +198,7 @@ class MyCustomLoader(DataLoader):
         )
         self.param1 = param1
         self.param2 = param2
-    
+
     def load(self) -> pd.DataFrame:
         # Implement loading logic
         # ...
@@ -219,7 +219,7 @@ class MyCustomProcessor(DataProcessor):
         )
         self.param1 = param1
         self.param2 = param2
-    
+
     def process(self, data: pd.DataFrame) -> pd.DataFrame:
         # Implement processing logic
         # ...
@@ -240,7 +240,7 @@ class MyCustomWriter(DataWriter):
         )
         self.param1 = param1
         self.param2 = param2
-    
+
     def write(self, data: pd.DataFrame) -> None:
         # Implement writing logic
         # ...
@@ -248,4 +248,47 @@ class MyCustomWriter(DataWriter):
 
 ## License
 
-MIT 
+MIT
+
+## Developer Guide
+
+### Code Style Guidelines
+
+This project uses the following tools to maintain code style consistency:
+
+- **Black**: Automatic code formatting tool
+- **isort**: Import statement sorting tool
+
+#### Local Setup
+
+1. Install development dependencies:
+
+```bash
+pip install black isort pre-commit
+```
+
+2. Set up pre-commit hooks:
+
+```bash
+pre-commit install
+```
+
+This will automatically run code formatting checks before each commit.
+
+#### Manual Formatting
+
+```bash
+# Format all Python files
+black .
+
+# Sort imports in all Python files
+isort .
+```
+
+#### Configuration Files
+
+Code style configurations are defined in the `pyproject.toml` file.
+
+### Continuous Integration
+
+We use GitHub Actions for continuous integration, ensuring all commits pass tests and code style checks. The workflow configuration can be found in `.github/workflows/python-test.yml`.
