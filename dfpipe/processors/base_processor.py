@@ -209,7 +209,7 @@ class FieldsOrganizer(DataProcessor):
     """组织和规范字段的处理器"""
 
     def __init__(
-        self, target_columns: List[str], default_values: Dict[str, Any] = None
+        self, target_columns: List[str], default_values: Dict[str, Any] = None, **kwargs
     ):
         """
         初始化字段组织处理器

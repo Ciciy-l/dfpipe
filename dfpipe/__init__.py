@@ -16,15 +16,15 @@ from dfpipe.core.pipeline import Pipeline
 from dfpipe.core.registry import ComponentRegistry
 
 # 导入内置组件，确保它们被注册
-from dfpipe.loaders.csv_loader import CSVLoader
-from dfpipe.processors.base_processor import (
+from dfpipe.loaders import CSVLoader
+from dfpipe.processors import (
     ColumnProcessor,
     FieldsOrganizer,
     FilterProcessor,
     TransformProcessor,
 )
 from dfpipe.utils.logging import setup_logging
-from dfpipe.writers.csv_writer import CSVWriter
+from dfpipe.writers import CSVWriter
 
 # 为常用类提供简短别名
 Loader = DataLoader
