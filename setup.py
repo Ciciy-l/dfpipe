@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="dfpipe",
-    version="0.0.2",
+    version="0.0.3",
     author="Leyia",
     author_email="x@leyia.fun",
     description="灵活、可扩展的DataFrame处理管道工具",
